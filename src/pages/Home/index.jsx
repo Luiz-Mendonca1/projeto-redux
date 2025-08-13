@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux'
 
 export function Home() {
 const user = useSelector((rootReducer) => rootReducer.user)
+ const currentUser = useSelector((state) => state.user.currentUser);
 
-console.log(user)
 
   function handleDeleteAddress(){
     alert("Endereço deletado com sucesso!")
@@ -32,7 +32,7 @@ console.log(user)
         <main className={styles.content}>
           <div className={styles.message}>
             <h1 className={styles.title}>
-              Olá Visitante, bem vindo!
+              Olá {currentUser?.name || 'visitante'}, bem vindo!
             </h1>
 
             <span>Email: ....</span>

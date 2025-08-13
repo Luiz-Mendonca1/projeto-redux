@@ -1,19 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  user: {
-    id: 1,
-    name: "John Doe",
-    email: 'email@test.com',
-    adress: null,
-  }
+  currentUser: null // Ou { name: null, email: null } para estrutura consistente
 };
 
 export const userSlice = createSlice({
-    name: "user",
-    initialState,
-    reducers: {
+  name: "user",
+  initialState,
+  reducers: {
+    createUser: (state, action) => {
+      state.currentUser = {
+        name: action.payload.name,
+        email: action.payload.email
+      };
+    },
+    // Adicione caso precise resetar
+    clearUser: (state) => {
+      state.currentUser = null;
     }
+  }
 });
 
+export const { createUser, clearUser } = userSlice.actions;
 export default userSlice.reducer;

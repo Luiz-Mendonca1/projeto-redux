@@ -1,17 +1,32 @@
 import { useState } from 'react'; 
 import styles from './login.module.css'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { createUser } from '../../redux/user/slice' 
 
 export function Login() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
 
-  function handleLogin(e){
-    e.preventDefault()
-    
-    console.log(name, email)
+  function handleLogin(e) {
+  e.preventDefault();
+
+  if (!name || !email) {
+    alert('Preencha todos os campos!');
+    return;
   }
+
+  dispatch(createUser({
+    name: name,  // Envia direto no payload
+    email: email // Sem aninhar em .user
+  }));
+  
+  // Redireciona após login (exemplo com React Router)
+  navigate('/painel'); // Redireciona para a página do painel
+}
 
   return (
     <div className={styles.container}>
@@ -36,7 +51,7 @@ export function Login() {
               placeholder='Digite seu email...'
             />
 
-            <button type="submit">Acessar</button>
+            <button type="submit" onClick={handleLogin}>Acessar</button>
           </form>
       </main>
     </div>
