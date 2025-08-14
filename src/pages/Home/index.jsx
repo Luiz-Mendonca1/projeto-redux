@@ -35,13 +35,15 @@ const user = useSelector((rootReducer) => rootReducer.user)
               Olá {currentUser?.name || 'visitante'}, bem vindo!
             </h1>
 
-            <span>Email: ....</span>
+            <span>Email: {currentUser.email || 'sem info'}</span>
 
 
             <strong className={styles.addressLabel}>Endereço atual:</strong>
             <div className={styles.address}>
-              <p>Rua centro, n 123</p>
-              
+              <p>
+          {currentUser.address.street || 'Rua não informada'}, 
+          n° {currentUser.address.number || 'SN'}
+        </p>
               <button onClick={handleDeleteAddress}>Deletar endereço</button>
             </div>
 

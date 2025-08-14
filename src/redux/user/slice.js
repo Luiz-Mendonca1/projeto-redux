@@ -11,7 +11,11 @@ export const userSlice = createSlice({
     createUser: (state, action) => {
       state.currentUser = {
         name: action.payload.name,
-        email: action.payload.email
+        email: action.payload.email,
+        address: {
+          street: null,
+          number: null,
+        }
       };
     },
     // Adicione caso precise resetar
