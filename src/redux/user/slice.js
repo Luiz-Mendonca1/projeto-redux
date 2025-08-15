@@ -18,12 +18,12 @@ export const userSlice = createSlice({
         }
       };
     },
-    // Adicione caso precise resetar
-    clearUser: (state) => {
+    // desloga ususario
+    logoutUser: (state) => {
       state.currentUser = null;
-    }
+      }
   }
 });
 
-export const { createUser, clearUser } = userSlice.actions;
+export const { createUser, logoutUser } = userSlice.actions;
 export default userSlice.reducer;

@@ -1,9 +1,12 @@
 import styles from './header.module.css'
 import { Link, useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux';
+import { logoutUser } from '../../redux/user/slice';
 
 export function Header(){
   const navigate = useNavigate();
-  const user = null;
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   function handleLogin(){
     navigate("/")
@@ -21,7 +24,7 @@ export function Header(){
           <h1>Dev<span>Redux</span></h1>
         </Link>
 
-        {user ? (
+        {currentUser ? (
           <button className={styles.logout} onClick={handleLogout}>
             Sair
           </button>
