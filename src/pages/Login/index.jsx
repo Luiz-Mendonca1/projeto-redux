@@ -1,15 +1,16 @@
-import { useState } from 'react'; 
-import styles from './login.module.css'
-
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux';
-import { createUser } from '../../redux/user/slice' 
+import { useDispatch } from 'react-redux'
+import { createUser } from '../../redux/user/slice'
+import { useState } from 'react'
+import styles from './login.module.css'
 
 export function Login() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [street, setStreet] = useState('')
+  const [number, setNumber] = useState('')
 
   function handleLogin(e) {
   e.preventDefault();
@@ -21,7 +22,8 @@ export function Login() {
 
   dispatch(createUser({
     name: name,  // Envia direto no payload
-    email: email // Sem aninhar em .user
+    email: email, // Sem aninhar em .user
+    address: { street, number }
   }));
   
   // Redireciona após login (exemplo com React Router)
@@ -49,6 +51,22 @@ export function Login() {
               value={email}
               onChange={ event => setEmail(event.target.value)}
               placeholder='Digite seu email...'
+            />
+            <input
+              type="text"
+              className={styles.input}
+              value={street}
+              onChange={e => setStreet(e.target.value)}
+              placeholder="Rua"
+              required
+            />
+            <input
+              type="text"
+              className={styles.input}
+              value={number}
+              onChange={e => setNumber(e.target.value)}
+              placeholder="Número"
+              required
             />
 
             <button type="submit" onClick={handleLogin}>Acessar</button>
